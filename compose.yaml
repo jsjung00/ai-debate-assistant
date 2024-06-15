@@ -11,7 +11,7 @@ services:
     build:
       context: ./ada-backend
       target: builder
-    container_name: ada-backend
+    container_name: ada-Backend
     env_file:
       - .env
     environment:
