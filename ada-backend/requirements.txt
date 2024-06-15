@@ -13,3 +13,5 @@ faster_whisper
 openai
 boto3
 elevenlabs
+# transformers
+# torch
