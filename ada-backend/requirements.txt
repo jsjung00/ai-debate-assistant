@@ -1,0 +1,12 @@
+uvicorn
+fastapi
+black
+isort
+websockets
+pydantic
+tiktoken
+jq
+requests
+nltk
+debugpy
+faster_whisper
