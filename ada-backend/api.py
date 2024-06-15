@@ -6,6 +6,8 @@ from speech.s3_uploader import generate_presigned_url, upload_audiostream_to_s3
 from speech.text_to_speech_stream import text_to_speech_stream
 import json
 
+from preprompt import process_speech
+
 model = WhisperModel("tiny")
 
 app_router = APIRouter()
@@ -17,7 +19,10 @@ async def upload_audio(file: UploadFile = File(...)):
         content = await file.read()
         temp_file.write(content)
     segments, info = model.transcribe(file_location)
-    return " ".join([segment.text for segment in segments])
+    speech =  " ".join([segment.text for segment in segments])
+    # print(speech)
+    # return speech
+    return process_speech( speech )
 
 
 

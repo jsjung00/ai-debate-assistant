@@ -16,3 +16,4 @@ elevenlabs
 # transformers
 # torch
 pydantic
+fitz
