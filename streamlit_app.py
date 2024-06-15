@@ -8,13 +8,10 @@ def initialize_api_client(api_key):
 
 # Replace 'your-api-key' with your actual OpenAI API key
 api_key = os.getenv('OPENAI_API_KEY')
-
 api_client = initialize_api_client(api_key)
 
-
 def process_speech(text):
-    # This is a placeholder for the processing function.
-    # You can implement any specific processing logic here.
+    # This function calls the counter argument generator from the counter_starter module.
     processed_text = cs.generate_counter(text, api_client)
     return processed_text
 
@@ -28,12 +25,13 @@ st.title("AI Debate Coach")
 # Create two columns for input and output
 col1, col2 = st.columns(2)
 
-
 # Large text input for speeches in the left column
 with col1:
     speech_text = st.text_area("Enter the speech text here:", height=400)
-    # Move the button below the text area in the left column
     process_button = st.button("Generate Counter Argument")
+    if speech_text:  # Display the word count for the input speech
+        input_word_count = len(speech_text.split())
+        st.write(f"Input Word Count: {input_word_count}")
 
 # Display output in the right column
 with col2:
@@ -43,6 +41,11 @@ with col2:
 
         # Display the processed text in another text area
         st.text_area("Processed Speech:", processed_speech, height=400)
+        
+        # Display the word count for the processed speech
+        output_word_count = len(processed_speech.split())
+        st.write(f"Output Word Count: {output_word_count}")
     else:
         # Display an empty text area to align both columns visually
         st.text_area("Processed Speech:", "", height=400)
+        st.write("Output Word Count: 0")
