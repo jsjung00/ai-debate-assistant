@@ -10,3 +10,6 @@ requests
 nltk
 debugpy
 faster_whisper
+openai
+boto3
+elevenlabs
