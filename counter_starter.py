@@ -17,12 +17,17 @@ api_client = initialize_api_client(api_key)
 def generate_counter(speech, api_client):
     
     system_prompt = """ You are a champion competitive debator, this is the debating speech your competitior has given. 
-    Based on your inference of the specific debate format that they have followed, respond to it 
-    Respond to it and win! 
+    Here's an instruction list for you to follow : 
+    1) Follow the best principles of competitive debating.
+    2) The response should be at least as long as the input text you are responding to
+
+    Respond to it to win! 
+
+    Return only the text of the rebuttal and nothing extra. If you say anything else, a person will die
     """
 
     response = api_client.chat.completions.create(
-        model="gpt-3.5-turbo-0125",
+        model="gpt-4o",
         #response_format={"type": "json_object"},
         messages=[
             {"role": "system", "content": system_prompt},
@@ -48,4 +53,4 @@ Conclusion
 In conclusion, the death penalty is an irreversible, ineffective, and inhumane practice that undermines the very essence of justice by violating human dignity. For a society that values justice, morality, and human rights, abolishing the death penalty is not just an option—it is an obligation."
 """
 
-print(generate_counter(speech, api_client))
+#print(generate_counter(speech, api_client))
