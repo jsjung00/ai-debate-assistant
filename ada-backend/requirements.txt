@@ -15,3 +15,4 @@ boto3
 elevenlabs
 # transformers
 # torch
+pydantic
