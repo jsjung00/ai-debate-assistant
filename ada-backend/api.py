@@ -17,7 +17,7 @@ async def upload_audio(file: UploadFile = File(...)):
         content = await file.read()
         temp_file.write(content)
     segments, info = model.transcribe(file_location)
-    return [{"start": segment.start, "end": segment.end, "text": segment.text} for segment in segments]
+    return " ".join([segment.text for segment in segments])
 
 
 
