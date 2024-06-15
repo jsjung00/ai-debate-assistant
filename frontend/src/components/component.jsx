@@ -17,11 +17,20 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
-import { Toggle, ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle"
+"use client"; // This marks the component as a Client Component
+
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 
 export function Component() {
+  const [message, setMessage] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const message = event.target.elements.message.value;
+    // Add your logic to send the message to the debate engine
+    console.log(message);
+  };
   return (
     (<div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
       <header
@@ -48,9 +57,20 @@ export function Component() {
                   </Button>
                 </h2>
               </div>
-              <div
-                className="prose prose-sm max-h-96 overflow-auto dark:prose-invert h-full">
-                <Textarea placeholder="Type your message..." />
+              <div className="prose prose-sm max-h-96 overflow-auto dark:prose-invert h-full">
+                <form onSubmit={handleSubmit}>
+                  <Textarea
+                    name="message"
+                    placeholder="Type your message..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                  <div className="flex justify-end mt-2">
+                    <Button variant="outline" type="submit" className="mt-2">
+                      Submit
+                    </Button>
+                  </div>
+                </form>
               </div>
             </div>
             <div className="p-4 h-full">
@@ -96,6 +116,12 @@ function MicIcon(props) {
   );
 }
 
+function handleSubmit(event) {
+  event.preventDefault();
+  const message = event.target.elements.message.value;
+  // Add your logic to send the message to the debate engine
+  console.log(message);
+}
 
 function VolumeIcon(props) {
   return (
