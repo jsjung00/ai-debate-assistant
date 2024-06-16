@@ -7,7 +7,7 @@ def initialize_api_client(api_key):
     return OpenAI(api_key=api_key)
 
 # Replace 'your-api-key' with your actual OpenAI API key
-api_key = os.getenv('OPENAI_API_KEY')
+api_key = os.getenv("OPENAI_API_KEY")
 api_client = initialize_api_client(api_key)
 
 def process_speech(text):
