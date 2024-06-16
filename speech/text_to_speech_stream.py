@@ -37,7 +37,7 @@ def text_to_speech_stream(text: str) -> IO[bytes]:
         voice_id="pNInz6obpgDQGcFmaJgB",  # Adam pre-made voice
         optimize_streaming_latency="0",
         output_format="mp3_22050_32",
-        text=text,
+        text=text[:400],
         model_id="eleven_multilingual_v2",
         voice_settings=VoiceSettings(
             stability=0.0,
