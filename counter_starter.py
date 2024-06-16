@@ -211,7 +211,7 @@ Identify flaws in the input speech voting criterion:  Review the relationship of
 
 Challenge their evidence: Listen carefully to the evidence to make certain that the evidence actually supports the claims your opponent attributes to it.
 """
-    prompt = f"Following the instructions and guidelines, generate a counter speech to this input speech: ${speech}. Return in plain text without using markdown or bullet points. Start with: I stand in negation of the resolution:."
+    prompt = f"Following the instructions, generate a counter speech to this input speech: ${speech}. You must start with 'I stand in negation of the resolution:'"
     key_points = find_key_points(text, prompt)
     #print(key_points)
     counter_speech = generate_counter_arg(prompt, preprompt)
