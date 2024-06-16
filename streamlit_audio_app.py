@@ -3,6 +3,7 @@ import streamlit as st
 from streamlit_mic_recorder import mic_recorder
 import os
 import counter_starter as cs
+from speech.text_to_speech import text_to_speech
 from openai import OpenAI
 import base64
 =======
@@ -73,6 +74,7 @@ with col2:
 
 with col3:
     st.write("Play MP3 from URL")
+<<<<<<< Updated upstream
     mp3_url = "https://fly.storage.tigris.dev/jun-15-hackathon/b58ff711-085a-472e-98db-c174e3dfc5e1.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=tid_TFQbzRJSrcbrnH_qnajVVsIBJswyQKSxWcZZhudY_rRRnJTfgG%2F20240616%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20240616T010646Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c655df9509f8d4d0318c7495be8c568220ac7cd08d3d8bbc29690e3f9ef4b8bd"  # Change this to your actual MP3 URL
     st.audio(mp3_url, format='audio/mp3')
 =======
@@ -106,5 +108,9 @@ with col3:
     st.subheader("Playback")
     st.write("Play MP3 from URL")
     mp3_url = "https://yourdomain.com/yourfile.mp3"
+    st.audio(mp3_url, format='audio/mp3')
+>>>>>>> Stashed changes
+=======
+    mp3_url = text_to_speech(st.text_area)#"https://fly.storage.tigris.dev/jun-15-hackathon/b58ff711-085a-472e-98db-c174e3dfc5e1.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=tid_TFQbzRJSrcbrnH_qnajVVsIBJswyQKSxWcZZhudY_rRRnJTfgG%2F20240616%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20240616T010646Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=c655df9509f8d4d0318c7495be8c568220ac7cd08d3d8bbc29690e3f9ef4b8bd"  # Change this to your actual MP3 URL
     st.audio(mp3_url, format='audio/mp3')
 >>>>>>> Stashed changes
