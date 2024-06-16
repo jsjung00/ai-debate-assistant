@@ -1,6 +1,8 @@
 ## OpenAI 
 
 from openai import OpenAI
+import markdown # pip install markdown
+from bs4 import BeautifulSoup # pip install beautifulsoup4
 
 import os
 
@@ -51,6 +53,11 @@ def find_key_points(text, prompt):
         ]
     )
     return response.choices[0].message.content
+
+def md_to_text(md):
+    html = markdown.markdown(md)
+    soup = BeautifulSoup(html, features='html.parser')
+    return soup.get_text()
 
 def generate_counter(speech, api_client):
     text = """
@@ -189,25 +196,24 @@ Djibouti
 “small strategically located country on the northeast coast of the Horn of Africa. It is situated on the Bab el Mandeb Strait, which lies to the east and separates the Red Sea from the Gulf of Aden.” (Britannica)
     """
     preprompt = """Instructions:
-You are a competitive Lincoln-Douglas debater. You will respond to the given lincoln-douglas speech. You must return a counter speech that responds point-by-point to all the points in the input speech and refute each and every one. I will give you some guidelines on how to return a competitive counter speech. Integrate these guidelines to strengthen your speech. 
+You are a competitive Lincoln-Douglas debater. You will respond to the given lincoln-douglas speech. You must return a counter speech that responds point-by-point to all the points in the input speech and refute each and every one. I will give you some guidelines on how to return a competitive counter speech. Integrate these guidelines to strengthen your speech.
 
 Guidelines:
-Point by point responses to the input speech: Present a line-by-line response to all the main logical points of the input speech.
+Point by point responses to the input speech: Present a line-by-line response to all the main logical points of the input speech. For each point, give multiple counter arguments in response.  
 
-Identify flaws in the input speech voting criterion:  Review the relationship of your opponent’s value and criterion carefully.  
-
-Refer logical fallacies by their name: When pointing out logical fallacies, state what kind of fallacy it is. Here are the fallacies that you can use: ad hominem fallacy, red herring, straw man argument, post hoc fallacy. 
+Identify flaws in the input speech voting criterion:  Review the relationship of your opponent’s value and criterion carefully. 
 
 Challenge their evidence: Listen carefully to the evidence to make certain that the evidence actually supports the claims your opponent attributes to it.
 """
-    prompt = f"Following the instructions and guidelines, generate a counter speech to this input speech: ${speech}. Return in plain text without using markdown or bullet points."
+    prompt = f"Following the instructions and guidelines, generate a counter speech to this input speech: ${speech}. Return in plain text without using markdown or bullet points. Start with: I stand in negation of the resolution:."
     key_points = find_key_points(text, prompt)
-    print(key_points)
+    #print(key_points)
     counter_speech = generate_counter_arg(prompt, preprompt)
-    print(counter_speech)
+    #print(counter_speech)
     updated_speech = generate_counter_arg_update_w_keypoints(counter_speech, key_points)
     print(updated_speech)
-    return updated_speech
+    no_markdown_speech = md_to_text(updated_speech)
+    return no_markdown_speech
 
 
 def _generate_counter(speech, api_client):
@@ -233,20 +239,3 @@ def _generate_counter(speech, api_client):
     return response.choices[0].message.content
 
 
-
-speech = """Ladies and gentlemen, the sanctity of human life and the inherent dignity of the individual lie at the core of our moral and legal systems. Today, I stand before you to argue that the death penalty fundamentally violates these principles and thus should be abolished. My value is Justice, upheld through the criterion of protecting human dignity.
-
-Contention 1: The Death Penalty is Irreversible and Risks Innocent Lives
-First, let's address the irreversibility of the death penalty. Our justice system, despite its intentions, is not infallible. Statistics from the Death Penalty Information Center show that since 1973, over 185 individuals sentenced to death have later been exonerated. These numbers not only highlight errors but also underscore the terrifying risk of executing the innocent—a risk that cannot be undone.
-
-Contention 2: The Death Penalty Fails as a Deterrent
-Moreover, the death penalty fails in its purported role as a crime deterrent. Extensive research indicates that states with the death penalty do not have lower rates of serious crimes than those without it. This lack of deterrence questions the effectiveness of the death penalty and challenges its justification on practical grounds.
-
-Contention 3: The Death Penalty Violates Human Dignity
-Finally, the death penalty inherently violates human dignity. The premeditated execution of a person by the state is a direct contradiction to the value of human life, a value endorsed by various international human rights organizations. The United Nations Human Rights Committee has repeatedly expressed concerns over the use of the death penalty, emphasizing its incompatibility with the right to life.
-
-Conclusion
-In conclusion, the death penalty is an irreversible, ineffective, and inhumane practice that undermines the very essence of justice by violating human dignity. For a society that values justice, morality, and human rights, abolishing the death penalty is not just an option—it is an obligation."
-"""
-
-#print(generate_counter(speech, api_client))
