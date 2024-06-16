@@ -188,8 +188,19 @@ North Africa
 Djibouti
 “small strategically located country on the northeast coast of the Horn of Africa. It is situated on the Bab el Mandeb Strait, which lies to the east and separates the Red Sea from the Gulf of Aden.” (Britannica)
     """
-    preprompt = "DO NOT GIVE A FURTHERMORE, ADDITIONALLY, IN CONCLUSION. YOU MUST Provide a Observation 1 for Contention 1 and its Subpoint A, Contention 2 make a Subpoint A, B and C. You are a champion competitive debator, this is the debating speech your competitior has given. Based on your inference of the specific debate format that they have followed, respond to it. Respond to it and win!To construct an effective counter-argument, immerse yourself deeply in the topic, seeking out and understanding numerous examples, and read extensively on both sides of the issue. Identify key authors and familiarize yourself with their works. After thorough immersion, brainstorm the foundational values and criteria that link these values to the topic. YOU MUST Provide a Observation 1 for Contention 1 and its Subpoint A, Contention 2 make a Subpoint A, B and C against each brainstormed item to prepare for potential clashes. This preparation will enable you to contest predictable arguments and develop a strong platform for your case. Divide roles into affirmative and negative debaters to craft cases that incorporate your style, evidence, clear organization, and direct incorporation of the topic wording. Establish a value premise, the ultimate value to uphold in the debate (e.g., Justice, Morality, Social Welfare), ensuring all arguments relate to this value. Next, decide on a criterion, the mechanism to achieve and weigh the value premise (e.g., the social contract, protection of individual rights). Finally, develop two or three main contentions, each supported by at least one quote, to form the core of your case. This comprehensive approach ensures a robust and coherent counter-argument that effectively engages with the core assertions of the prompt. YOU MUST Provide a Observation 1 for Contention 1 and its Subpoint A, Contention 2 make a Subpoint A, B and C."
-    prompt = "Make a counter argument speech to this speech: ${speech}"
+    preprompt = """Instructions:
+You are a competitive Lincoln-Douglas debater. You will respond to the given lincoln-douglas speech. You must return a counter speech that responds point-by-point to all the points in the input speech and refute each and every one. I will give you some guidelines on how to return a competitive counter speech. Integrate these guidelines to strengthen your speech. 
+
+Guidelines:
+Point by point responses to the input speech: Present a line-by-line response to all the main logical points of the input speech.
+
+Identify flaws in the input speech voting criterion:  Review the relationship of your opponent’s value and criterion carefully.  
+
+Refer logical fallacies by their name: When pointing out logical fallacies, state what kind of fallacy it is. Here are the fallacies that you can use: ad hominem fallacy, red herring, straw man argument, post hoc fallacy. 
+
+Challenge their evidence: Listen carefully to the evidence to make certain that the evidence actually supports the claims your opponent attributes to it.
+"""
+    prompt = f"Following the instructions and guidelines, generate a counter speech to this input speech: ${speech}. Return in plain text without using markdown or bullet points."
     key_points = find_key_points(text, prompt)
     print(key_points)
     counter_speech = generate_counter_arg(prompt, preprompt)
