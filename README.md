@@ -8,6 +8,9 @@ https://docs.google.com/document/d/1hE1En5cYHfns5L3rJyKJq-wVgy9RE99RzRt_XYMxF_4/
 Case files (RAG)
 https://docs.google.com/document/d/1XuRrxw_t7m4a2CV1w934W5YEsrazLlc1oZYjXwMPJD8/edit
 
+How to do refutation file
+https://www.uiltexas.org/files/academics/LD_23_24_Interactive.pdf (Page 65-66)
+
 
 TODO 
 - [] Match the length of the user input
